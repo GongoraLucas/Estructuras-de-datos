@@ -16,26 +16,13 @@ private:
     VisualizadorPila visualizador;
 
 public:
-    GestorPila()
-        : visualizador(&pila)
-    {
-        // Abrimos una ventana de 1280×768 píxeles
-        initwindow(1280, 768, "Pila Dinamica");
-    }
+    GestorPila(): visualizador(&pila){}
 
-    ~GestorPila() {
-        closegraph();
-    }
-
-    // --------------------------------------------------------
-    // Dibuja el menú a la derecha con fondo negro y texto blanco
-    // --------------------------------------------------------
-
+    ~GestorPila(){}
 
     void mostrarMenu() {
         const int MENU_ANCHO = 300;
         int xMenu = getmaxx() - MENU_ANCHO;
-        // Fondo negro de la sección del menú
         setfillstyle(SOLID_FILL, BLACK);
         bar(xMenu, 0, getmaxx(), getmaxy());
 
@@ -43,7 +30,6 @@ public:
         setcolor(WHITE);
 
         int yPos = 50;
-        // Centrar título en el menú
         char linea1[] = "MENU DE OPERACIONES";
         int ancho1 = textwidth(linea1);
         outtextxy(xMenu + (MENU_ANCHO - ancho1) / 2, yPos, linea1);
@@ -61,7 +47,6 @@ public:
         yPos += 30;
         outtextxy(xMenu + 10, yPos, "ESC - SALIR");
 
-        // Estado debajo del menú
         yPos += 60;
         outtextxy(xMenu + 10, yPos, "Estado:");
         yPos += 30;
@@ -81,14 +66,8 @@ public:
         }
     }
 
-
-    // --------------------------------------------------------
-    // Permite al usuario teclear sus propios dígitos y devuelve el entero al presionar ENTER.
-    // --------------------------------------------------------
     int obtenerNumero() {
         visualizador.clearArea();
-
-        // Dibuja cuadro de entrada (fondo negro + texto blanco)
         setfillstyle(SOLID_FILL, BLACK);
         bar(200, 200, 540, 320);
         setcolor(WHITE);
@@ -101,34 +80,30 @@ public:
 
         std::string numeroStr;
         int xInput = 210;
-        int yInput = 320;  // donde dibujaremos el número que el usuario escribe
+        int yInput = 320;
 
         while (true) {
-            // Preparamos buffer  para medición y dibujo
             char buffer[256] = {0};
             std::strncpy(buffer, numeroStr.c_str(), sizeof(buffer) - 1);
 
-            // Borramos texto anterior dibujando fondo negro detrás
             int anchoAnterior = textwidth(buffer);
             int altoAnterior  = textheight(buffer);
             setfillstyle(SOLID_FILL, BLACK);
             bar(xInput, yInput - altoAnterior + 2, xInput + anchoAnterior, yInput + 2);
 
-            // Esperamos por la siguiente tecla
             if (kbhit()) {
                 char c = getch();
-                if (c == 8) { // BACKSPACE
+                if (c == 8) {
                     if (!numeroStr.empty()) {
                         numeroStr.pop_back();
                     }
-                } else if (c == 13) { // ENTER
+                } else if (c == 13) {
                     break;
                 } else if (c >= '0' && c <= '9') {
                     numeroStr.push_back(c);
                 }
             }
 
-            // Redibujamos el texto actual en un buffer
             char dibujo[256] = {0};
             std::strncpy(dibujo, numeroStr.c_str(), sizeof(dibujo) - 1);
             setcolor(WHITE);
@@ -137,7 +112,6 @@ public:
             delay(50);
         }
 
-        // Convertimos a entero (si la cadena está vacía, devolvemos 0)
         int valor = 0;
         if (!numeroStr.empty()) {
             valor = std::stoi(numeroStr);
@@ -145,13 +119,8 @@ public:
         return valor;
     }
 
-    // --------------------------------------------------------
-    // Llena la pila con datos de demostración (5,15,25,35), animando cada push
-    // --------------------------------------------------------
     void llenarPila() {
         visualizador.clearArea();
-
-
         settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
         setcolor(WHITE);
         char msg[] = "Llenando pila...";
@@ -170,9 +139,6 @@ public:
         }
     }
 
-    // --------------------------------------------------------
-    // Vacía completamente la pila con animación de cada pop
-    // --------------------------------------------------------
     void vaciarPilaCompleta() {
         visualizador.clearArea();
         settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
@@ -190,7 +156,6 @@ public:
             delay(300);
         }
 
-
         settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
         setcolor(WHITE);
         char msg2[] = "Pila vaciada!";
@@ -203,9 +168,6 @@ public:
         delay(1000);
     }
 
-    // --------------------------------------------------------
-    // Mostrar recursivamente todos los elementos (pantalla)
-    // --------------------------------------------------------
     void demostrarRecursion() {
         if (pila.estaVacia()) {
             visualizador.clearArea();
@@ -249,9 +211,6 @@ public:
         delay(1000);
     }
 
-    // --------------------------------------------------------
-    // Bucle principal: espera tecla y ejecuta la operación
-    // --------------------------------------------------------
     void ejecutar() {
         bool continuar = true;
 
@@ -294,6 +253,17 @@ public:
 
             delay(100);
         }
+
+        // Mensaje de regreso
+        visualizador.clearArea();
+        setcolor(WHITE);
+        settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+        char mensaje[] = "Regresando al menu principal...";
+        int ancho = textwidth(mensaje);
+        int alto = textheight(mensaje);
+        bar(100, 100, 100 + ancho, 100 + alto);
+        outtextxy(100, 100 + alto, mensaje);
+        delay(1500);
     }
 };
 
