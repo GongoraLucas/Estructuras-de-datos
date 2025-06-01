@@ -41,10 +41,6 @@ public:
         yPos += 30;
         outtextxy(xMenu + 10, yPos, "3. TOP    - Ver cima");
         yPos += 30;
-        outtextxy(xMenu + 10, yPos, "4. LLENAR ");
-        yPos += 30;
-        outtextxy(xMenu + 10, yPos, "5. VACIAR ");
-        yPos += 30;
         outtextxy(xMenu + 10, yPos, "ESC - SALIR");
 
         yPos += 60;
@@ -119,98 +115,6 @@ public:
         return valor;
     }
 
-    void llenarPila() {
-        visualizador.clearArea();
-        settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-        setcolor(WHITE);
-        char msg[] = "Llenando pila...";
-        int ancho = textwidth(msg);
-        int alto  = textheight(msg);
-        setfillstyle(SOLID_FILL, BLACK);
-        bar(100, 100, 100 + ancho, 100 + alto);
-        setcolor(WHITE);
-        outtextxy(100, 100 + alto, msg);
-        delay(1000);
-
-        int valores[] = {5, 15, 25, 35};
-        for (int i = 0; i < 4; i++) {
-            visualizador.animarPush(valores[i]);
-            delay(300);
-        }
-    }
-
-    void vaciarPilaCompleta() {
-        visualizador.clearArea();
-        settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-        setcolor(WHITE);
-        char msg[] = "Vaciando pila...";
-        int ancho = textwidth(msg), alto = textheight(msg);
-        setfillstyle(SOLID_FILL, BLACK);
-        bar(100, 100, 100 + ancho, 100 + alto);
-        setcolor(WHITE);
-        outtextxy(100, 100 + alto, msg);
-        delay(1000);
-
-        while (!pila.estaVacia()) {
-            visualizador.animarPop();
-            delay(300);
-        }
-
-        settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-        setcolor(WHITE);
-        char msg2[] = "Pila vaciada!";
-        ancho = textwidth(msg2);
-        alto  = textheight(msg2);
-        setfillstyle(SOLID_FILL, BLACK);
-        bar(100, 140, 100 + ancho, 140 + alto);
-        setcolor(WHITE);
-        outtextxy(100, 140 + alto, msg2);
-        delay(1000);
-    }
-
-    void demostrarRecursion() {
-        if (pila.estaVacia()) {
-            visualizador.clearArea();
-            settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-            setcolor(WHITE);
-            char msg[] = "Pila vacia - sin datos";
-            int ancho = textwidth(msg), alto = textheight(msg);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(100, 100, 100 + ancho, 100 + alto);
-            setcolor(WHITE);
-            outtextxy(100, 100 + alto, msg);
-            delay(1000);
-            return;
-        }
-
-        visualizador.clearArea();
-        settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-        setcolor(WHITE);
-        char lbl[] = "Mostrando recursivo:";
-        int ancho   = textwidth(lbl), alto = textheight(lbl);
-        setfillstyle(SOLID_FILL, BLACK);
-        bar(100, 100, 100 + ancho, 100 + alto);
-        setcolor(WHITE);
-        outtextxy(100, 100 + alto, lbl);
-
-        int yPos = 140;
-        for (int i = pila.getTamanio() - 1; i >= 0; i--) {
-            char texto[50];
-            std::sprintf(texto, "Nivel %d: %d", i, pila.obtenerValor(i));
-            settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
-            setcolor(WHITE);
-            ancho = textwidth(texto);
-            alto  = textheight(texto);
-            setfillstyle(SOLID_FILL, BLACK);
-            bar(100, yPos - alto + 2, 100 + ancho, yPos + 2);
-            setcolor(WHITE);
-            outtextxy(100, yPos, texto);
-            yPos += 30;
-            delay(300);
-        }
-        delay(1000);
-    }
-
     void ejecutar() {
         bool continuar = true;
 
@@ -236,17 +140,10 @@ public:
                 case '3':
                     visualizador.animarTop();
                     break;
-                case '4':
-                    llenarPila();
-                    break;
-                case '5':
-                    vaciarPilaCompleta();
-                    break;
                 case 27:  // ESC
                     continuar = false;
                     break;
                 default:
-                    demostrarRecursion();
                     continuar = false;
                     break;
             }
