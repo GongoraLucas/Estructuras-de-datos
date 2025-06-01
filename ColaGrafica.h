@@ -18,7 +18,6 @@ public:
     void cerrarVentana() {
         outtextxy(10, 370, const_cast<char*>("Presione una tecla para salir..."));
         getch();
-        closegraph();
     }
 
     void animarIngreso(Nodo* frente) {

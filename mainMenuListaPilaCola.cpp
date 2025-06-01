@@ -3,18 +3,18 @@
 #include <conio.h>
 #include <cstring>
 #include "gestorPila.hpp"
+#include "gestorCola.hpp"
 
 using namespace std;
 
-void mostrarMenu();
+void mostrarMenuPrincipal();
 
 int main() {
-
     initwindow(1280, 768, "Menu Principal");
 
     while (true) {
         cleardevice();
-        mostrarMenu();
+        mostrarMenuPrincipal();
 
         char opcion = getch();
 
@@ -29,10 +29,12 @@ int main() {
                 break;
             }
 
-            case '2':
+            case '2': {
                 outtextxy(getmaxx() / 2 - 150, getmaxy() / 2, (char*)"Gestion de Cola seleccionada");
-                // Aquí llamarás a tu función de submenú para Cola
+                GestorCola gestorCola;
+                gestorCola.ejecutar();
                 break;
+            }
 
             case '3':
                 outtextxy(getmaxx() / 2 - 150, getmaxy() / 2, (char*)"Gestion de Lista seleccionada");
@@ -53,7 +55,7 @@ int main() {
     return 0;
 }
 
-void mostrarMenu() {
+void mostrarMenuPrincipal() {
     settextstyle(3, 0, 3);  // Fuente, dirección, tamaño
 
     int midX = getmaxx() / 2;
