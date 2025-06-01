@@ -4,9 +4,9 @@
 #include <iostream>
 #include <windows.h>
 #include <clocale>
-#include "ColaDinamica.h"
-#include "ColaGrafica.h"
-#include "Menu.h"
+#include "ColaDinamica.hpp"
+#include "ColaGrafica.hpp"
+#include "Menu.hpp"
 
 struct GestorCola {
 private:

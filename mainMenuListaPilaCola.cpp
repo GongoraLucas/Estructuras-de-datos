@@ -2,8 +2,9 @@
 #include <iostream>
 #include <conio.h>
 #include <cstring>
-#include "gestorPila.hpp"
-#include "gestorCola.hpp"
+#include "GestorPila.hpp"
+#include "GestorCola.hpp"
+#include "GestorLista.hpp"
 
 using namespace std;
 
@@ -36,17 +37,21 @@ int main() {
                 break;
             }
 
-            case '3':
+            case '3':{
                 outtextxy(getmaxx() / 2 - 150, getmaxy() / 2, (char*)"Gestion de Lista seleccionada");
-                // Aquí llamarás a tu función de submenú para Lista
+                GestorLista gestorLista;
+                gestorLista.ejecutar();
                 break;
-
-            case '0':
+            }
+            case '0':{
                 closegraph();
                 exit(0);
+            }
 
-            default:
+            default:{
                 outtextxy(getmaxx() / 2 - 150, getmaxy() / 2, (char*)"Opcion invalida. Intente de nuevo.");
+            }
+
         }
 
         delay(1500);  // Esperar antes de mostrar de nuevo el menú

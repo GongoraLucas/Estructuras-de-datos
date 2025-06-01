@@ -6,13 +6,12 @@
 #include <windows.h>
 
 void initVentana() {
-    initwindow(1000, 200, (char*)"Lista Visual");
     setbkcolor(BLACK);
     cleardevice();
 }
 
 void cerrarVentana() {
-    closegraph();
+//    closegraph();
 }
 
 void limpiarNodo(int x, int y) {

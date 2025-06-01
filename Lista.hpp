@@ -1,18 +1,17 @@
 
 #ifndef LISTA_HPP
 #define LISTA_HPP
-
 #include <iostream>
 using namespace std;
 
 struct Nodo {
-    int dato;
-    Nodo* siguiente;
+        int dato;
+        Nodo* siguiente;
 
-    Nodo(int d) : dato(d), siguiente(nullptr) {}
+        Nodo(int d) : dato(d), siguiente(nullptr) {}
 };
 
-class Lista {
+struct Lista {
 private:
     Nodo* cabeza;
 
