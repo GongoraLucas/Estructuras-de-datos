@@ -1,5 +1,5 @@
-#ifndef MENU_HPP
-#define MENU_HPP
+#ifndef MENUINPUTCOLA_HPP
+#define MENUINPUTCOLA_HPP
 
 #include <iostream>
 using namespace std;

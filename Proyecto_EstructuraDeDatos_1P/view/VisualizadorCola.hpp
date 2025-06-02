@@ -1,12 +1,12 @@
-#ifndef COLAGRAFICA_HPP
-#define COLAGRAFICA_HPP
+#ifndef VISUALIZADORCOLA_HPP
+#define VISUALIZADORCOLA_HPP
 
-#include "NodoCola.hpp"
+#include "../model/NodoCola.hpp"
 #include <graphics.h>
 #include <string>
 using namespace std;
 
-class ColaGrafica {
+struct VisualizadorCola {
 public:
     void inicializarVentana() {
         setbkcolor(LIGHTGRAY);
@@ -93,4 +93,4 @@ private:
     }
 };
 
-#endif // COLAGRAFICA_HPP
+#endif // VISUALIZADORCOLA_HPP

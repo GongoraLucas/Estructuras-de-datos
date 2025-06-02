@@ -1,11 +1,10 @@
-#ifndef COLADINAMICA_HPP
-#define COLADINAMICA_HPP
-
-#include "NodoCola.hpp"
+#ifndef COLA_HPP
+#define COLA_HPP
+#include "../model/NodoCola.hpp"
 #include <iostream>
 using namespace std;
 
-class ColaDinamica {
+struct ColaDinamica {
 private:
     NodoCola* frente;
     NodoCola* final;
@@ -13,7 +12,7 @@ private:
 public:
     ColaDinamica() : frente(nullptr), final(nullptr) {}
 
-    void registrarPaciente(string nombre, string cedula) {
+    void registrarCliente(string nombre, string cedula) {
         NodoCola* nuevo = new NodoCola(nombre, cedula);
         if (!frente) {
             frente = nuevo;
@@ -24,7 +23,7 @@ public:
         }
     }
 
-    void atenderPaciente() {
+    void atenderCliente() {
         if (frente) {
             NodoCola* temp = frente;
             frente = frente->siguiente;
@@ -33,22 +32,22 @@ public:
         }
     }
 
-    void mostrarPacientesRecursivo(NodoCola* nodo) {
+    void mostrarClientesRecursivo(NodoCola* nodo) {
         if (!nodo) return;
         cout << "Nombre: " << nodo->nombre << ", Cédula: " << nodo->cedula << endl;
-        mostrarPacientesRecursivo(nodo->siguiente);
+        mostrarClientesRecursivo(nodo->siguiente);
     }
 
-    void mostrarPacientesRecursivo() {
+    void mostrarClientesRecursivo() {
         if (!frente) {
-            cout << "Ya no hay pacientes en la cola.\n";
+            cout << "Ya no hay clientes  en la cola.\n";
             return;
         }
-        mostrarPacientesRecursivo(frente);
+        mostrarClientesRecursivo(frente);
     }
 
     NodoCola* obtenerFrente() { return frente; }
     bool estaVacia() { return frente == nullptr; }
 };
 
-#endif // COLADINAMICA_HPP
+#endif // COLA_HPP

@@ -20,7 +20,7 @@ int main() {
         char opcion = getch();
 
         cleardevice();
-        settextstyle(3, 0, 2);  // Fuente y tamaño para los mensajes
+        settextstyle(3, 0, 2);
 
         switch (opcion) {
             case '1': {
@@ -54,14 +54,14 @@ int main() {
 
         }
 
-        delay(1500);  // Esperar antes de mostrar de nuevo el menú
+        delay(1500);
     }
 
     return 0;
 }
 
 void mostrarMenuPrincipal() {
-    settextstyle(3, 0, 3);  // Fuente, dirección, tamaño
+    settextstyle(3, 0, 3);
 
     int midX = getmaxx() / 2;
     int startY = getmaxy() / 2 - 100;

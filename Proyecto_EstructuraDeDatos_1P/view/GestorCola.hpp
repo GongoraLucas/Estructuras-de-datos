@@ -1,21 +1,19 @@
 #ifndef GESTORCOLA_HPP
 #define GESTORCOLA_HPP
-
 #include <iostream>
 #include <windows.h>
 #include <clocale>
-#include "ColaDinamica.hpp"
-#include "ColaGrafica.hpp"
-#include "Menu.hpp"
+#include "../controller/Cola.hpp"
+#include "VisualizadorCola.hpp"
+#include "MenuInputCola.hpp"
 
 struct GestorCola {
 private:
     ColaDinamica cola;
-    ColaGrafica vista;
+    VisualizadorCola vista;
 
 public:
     GestorCola() {
-        // Configuración de idioma y consola
         setlocale(LC_ALL, "");
         SetConsoleOutputCP(65001);
         SetConsoleCP(65001);
@@ -42,17 +40,17 @@ public:
                     std::getline(std::cin, nombre);
                     std::cout << "Cédula: ";
                     std::getline(std::cin, cedula);
-                    cola.registrarPaciente(nombre, cedula);
+                    cola.registrarCliente(nombre, cedula);
                     vista.animarIngreso(cola.obtenerFrente());
                     break;
 
                 case 2:
                     if (!cola.estaVacia()) {
                         vista.animarSalida(cola.obtenerFrente());
-                        cola.atenderPaciente();
+                        cola.atenderCliente();
                         if (cola.estaVacia())
                             vista.mostrarColaVacia();
-                        std::cout << "Paciente atendido.\n";
+                        std::cout << "Cliente atendido.\n";
                     } else {
                         std::cout << "No hay clientes en la cola.\n";
                         vista.mostrarColaVacia();
@@ -61,7 +59,7 @@ public:
 
                 case 3:
                     std::cout << "--- COLA ACTUAL ---\n";
-                    cola.mostrarPacientesRecursivo();
+                    cola.mostrarClientesRecursivo();
                     break;
 
                 case 4:

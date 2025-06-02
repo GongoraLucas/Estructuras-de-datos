@@ -3,21 +3,22 @@
 
 #include <iostream>
 #include <windows.h>
-#include "Lista.hpp"
-#include "VisualLista.hpp"
+#include "../controller/Lista.hpp"
+#include "VisualizadorLista.hpp"
 
 using namespace std;
 
 struct GestorLista {
 public:
     void ejecutar() {
-        initVentana(); // Inicia la ventana
+        visual.initVentana(); // Inicia la ventana
         menuLoop();
-        cerrarVentana();
+        visual.cerrarVentana(); // Cierra la ventana
     }
 
 private:
     Lista lista;
+    VisualizadorLista visual; // Instancia de la vista
 
     void menuLoop() {
         int opcion;
@@ -28,7 +29,7 @@ private:
             mostrarMenu();
             cin >> opcion;
 
-            switch(opcion) {
+            switch (opcion) {
                 case 1:
                     insertarElemento();
                     break;
@@ -44,7 +45,7 @@ private:
             system("pause");
             system("cls");
 
-        } while(opcion != 4);
+        } while (opcion != 4);
     }
 
     void mostrarMenu() {
@@ -61,16 +62,16 @@ private:
         cout << "Ingrese valor a insertar: ";
         cin >> valor;
         lista.insertar(valor);
-        dibujarLista(lista, valor, true, false); // Animar inserción
+        visual.dibujarLista(lista, valor, true, false); // Animar inserción
     }
 
     void eliminarElemento() {
         int valor;
         cout << "Ingrese valor a eliminar: ";
         cin >> valor;
-        dibujarLista(lista, valor, false, true); // Animar eliminación antes de borrar
+        visual.dibujarLista(lista, valor, false, true); // Animar eliminación antes
         lista.eliminar(valor);
-        dibujarLista(lista); // Redibujar lista limpia
+        visual.dibujarLista(lista); // Redibujar sin animación
     }
 
     void mostrarLista() {
